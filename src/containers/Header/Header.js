@@ -8,7 +8,7 @@ class Header extends Component {
     return (
       <div className="menu">
         <div className="navbar-homepage">
-        <NavLink className="dropdown-item" to="/ViewRequests">
+          <NavLink className="dropdown-item" to="/ViewRequests">
             Home
           </NavLink>
           <NavLink className="dropdown-item" to="/CreateRequest">
@@ -17,13 +17,11 @@ class Header extends Component {
 
           <span className="logoutSpan">
             <button id="logoutButton">
-              <a href="#">Log Out</a>
+              <NavLink className="dropdown-item" to="/">
+                Log Out
+              </NavLink>
             </button>
           </span>
-
-          <a href="#" id="adminpage">
-            Administrator Page
-          </a>
         </div>
       </div>
     );

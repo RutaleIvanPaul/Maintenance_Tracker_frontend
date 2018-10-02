@@ -77,7 +77,13 @@ class Authentication extends Component {
 		console.log(response.data.token);
 		if(response.data.token){
       localStorage.setItem('token', response.data.token);
-      push(`/`);
+      if (response.data.type === "admin"){
+        push(`/AdminViewRequests`);
+      }
+      else{
+        push(`/ViewRequests`);
+      }
+      
 		}
 		else{
 			push(`/`);
