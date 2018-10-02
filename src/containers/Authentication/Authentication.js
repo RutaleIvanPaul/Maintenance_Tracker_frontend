@@ -74,9 +74,10 @@ class Authentication extends Component {
 		data: data
 	  })
 	  .then((response) => {
-		console.log(response);
+		console.log(response.data.token);
 		if(response.data.token){
-			push(`/`);
+      localStorage.setItem('token', response.data.token);
+      push(`/`);
 		}
 		else{
 			push(`/`);
