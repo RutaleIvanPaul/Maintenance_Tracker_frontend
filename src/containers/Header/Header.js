@@ -8,7 +8,9 @@ class Header extends Component {
     return (
       <div className="menu">
         <div className="navbar-homepage">
-          <a href="#">Home</a>
+        <NavLink className="dropdown-item" to="/ViewRequests">
+            Home
+          </NavLink>
           <NavLink className="dropdown-item" to="/CreateRequest">
             New Request
           </NavLink>
