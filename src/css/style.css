@@ -498,3 +498,12 @@ textarea {
 .show {
   display: block;
 }
+
+.no_display{
+  display: none;
+}
+
+.display{
+  display: block;
+}
+
