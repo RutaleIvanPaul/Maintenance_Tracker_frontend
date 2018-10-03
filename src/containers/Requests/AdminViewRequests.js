@@ -21,7 +21,7 @@ class AdminViewRequests extends Component {
       headers: {
         "x-access-token": localStorage.getItem("token")
       }
-    }).then(response => {
+    }).then(() => {
         this.fetchRequests();
     });
   };
