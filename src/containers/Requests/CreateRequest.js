@@ -3,12 +3,16 @@ import axios from "axios";
 import "../../css/style.css";
 
 class CreateRequest extends Component {
-  state = {};
+  state = {
+    message:"Input Request Here"
+  };
 
   submitRequest = (e) => {
 	e.preventDefault();
-	const {title,description} =this.state;
-    const data = {
+  const {title,description} =this.state;
+  const { history } = this.props;
+  const { push } = history;
+  const data = {
 	  title,
 	  description
     };
@@ -22,19 +26,27 @@ class CreateRequest extends Component {
 		data: data
 	  })
 	  .then((response) => {
-        console.log(response);
+      console.log(response);
+      push(`/ViewRequests`);
+      }).catch((error) => {
+        if (error.response){
+          this.setState({
+            message:"Request Could not be created."
+          })
+        }
       });
   };
 
   eventListener = event => this.setState({ [event.target.name]: event.target.value });
 
   render() {
+    const { message } = this.state;
     return (
-      <div className="form3 animated fadeIn">
+      <div className="form">
         <div>
           <div className="tab-content">
             <div id="signup">
-              <h1>Input Request Here</h1>
+              <h1>{ message }</h1>
               <form onSubmit={this.submitRequest}>
                 <div className="field-wrap">
                   <input
@@ -53,6 +65,7 @@ class CreateRequest extends Component {
                 rows="5" 
                 placeholder="Request Description"
                 onChange={this.eventListener}
+                maxLength="50"
                 />
                 </div>
 

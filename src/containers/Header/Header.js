@@ -4,12 +4,18 @@ import "../../css/style.css";
 
 class Header extends Component {
   state = {};
+  Logout = () =>{
+    localStorage.removeItem("token");
+  }
   render() {
     return (
       <div className="menu">
         <div className="navbar-homepage">
+        {localStorage.getItem("type") === "admin" ?  <NavLink className="dropdown-item" to="/AdminViewRequests">
+          User Requests
+          </NavLink> : null}
           <NavLink className="dropdown-item" to="/ViewRequests">
-            Home
+            My Requests
           </NavLink>
           <NavLink className="dropdown-item" to="/CreateRequest">
             New Request
@@ -17,7 +23,7 @@ class Header extends Component {
 
           <span className="logoutSpan">
             <button id="logoutButton">
-              <NavLink className="dropdown-item" to="/">
+              <NavLink className="dropdown-item" to="/" onClick={this.Logout}>
                 Log Out
               </NavLink>
             </button>

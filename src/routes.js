@@ -11,12 +11,13 @@ const routes = props => {
     <div>
       <BrowserRouter>
       <div>
-        <Header />
+        {localStorage.getItem("token") ? <Header /> : null}
         <Switch>
           <Route path="/" exact component={Authentication} />
           <Route path="/CreateRequest" exact component={CreateRequest} />
           <Route path="/ViewRequests" exact component={ViewRequests} />
           <Route path="/AdminViewRequests" exact component={AdminViewRequests} />
+          
         </Switch>
         </div>
       </BrowserRouter>
