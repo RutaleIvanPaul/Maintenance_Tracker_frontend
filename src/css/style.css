@@ -27,8 +27,9 @@ a:hover {
 .form {
   background: rgba(15, 30, 34, 0.9);
   padding: 40px;
-  max-width: 600px;
-  margin: 40px 40px 80px 40px;
+  margin-left: 30%;
+  margin-right: 30%;
+  margin-top: 5%;
   border-radius: 4px;
   box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
 }
@@ -304,7 +305,8 @@ textarea {
   position: fixed;
   top: 0;
   width: 100%;
-  margin-left: -8px;
+  margin-left:auto;
+  margin-right: auto;
 }
 
 .navbar-homepage a {
@@ -352,69 +354,43 @@ textarea {
   background: none;
 }
 
-#menu {
+.menu {
   height: 71px;
-  padding-top: 35px;
   text-align: right;
 }
 
-#menu a {
-  margin: 0;
-  height: 100px;
-  padding: 35px 6px 41px 6px;
-  font-size: 1.6em;
-  font-weight: normal;
-  letter-spacing: -1px;
-  color: #888;
-}
-
-#menu a:hover {
-  color: #269;
-  text-decoration: none;
-  padding: 35px 5px 41px 5px;
-  border-left: 1px solid #eee;
-  border-right: 1px solid #eee;
-}
-
-#content {
+.content {
   margin-top: 50px;
   margin-left: 100px;
   width: 100%;
   clear: both;
 }
 
-#content h2 {
+.content h2 {
   margin: 0 0 10px 0;
   color: #555;
   border-bottom: 2px solid #abb;
 }
 
-#content h2 a {
+.content h2 a {
   color: #fff;
   font-weight: normal;
 }
-/*#content h2 a{
-    color:black;
-    font-weight:normal;
-    }*/
-
-#content h2 a:hover {
+.content h2 a:hover {
   color: #269;
   text-decoration: none;
   background: none;
 }
 
-#content p {
+.content p {
   margin: 0 0.5em 1.2em 0.5em;
 }
 
-#left {
-  width: 68%;
-  float: left;
-}
 
 .entry {
-  margin: 0 0 20px 0;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-bottom: 20px;
   border: 2px solid #fff;
   background: rgba(15, 30, 34, 0.9);
   color: #fff;

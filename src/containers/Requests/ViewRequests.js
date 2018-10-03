@@ -28,14 +28,14 @@ class ViewRequests extends Component {
       <div class="main">
         <div id="content">
           <div id="left">
-            {requests.map((data, key) => (
+            {requests.length >= 1 ? requests.map((data, key) => (
               <Request
                 key={key}
                 title={data.title}
                 description={data.description}
                 status={data.status}
               />
-            ))}
+            )): <button className="button button-block">No requests yet.</button>}
           </div>
         </div>
       </div>
