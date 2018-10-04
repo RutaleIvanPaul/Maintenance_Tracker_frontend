@@ -73,10 +73,15 @@ a:hover {
   color: #a0b3b0;
   font-size: 20px;
   float: left;
-  width: 50%;
+  width: 100%;
   text-align: center;
   cursor: pointer;
   transition: 0.5s ease;
+}
+
+.col-md-6{
+  padding-left: 0px;
+  padding-right: 0px;
 }
 
 .approve {

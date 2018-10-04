@@ -107,20 +107,20 @@ class Authentication extends Component {
     return (
       <div>
         <div className="form">
-          <ul className="tab-group">
-            <li className={signup_tab} id="signup-tab">
+          <ul className="tab-group row">
+            <li className={`${signup_tab} col-md-6`} id="signup-tab">
               <a href="#signup" name="signup" onClick={this.switchDisplay}>
                 Sign Up
               </a>
             </li>
-            <li className={login_tab} id="login-tab">
+            <li className={`${login_tab} col-md-6`} id="login-tab">
               <a href="#login" name="login" onClick={this.switchDisplay}>
                 Log In
               </a>
             </li>
           </ul>
           <div className="tab-content">
-            <div className={signup_class}>
+            <div className={`${signup_class} row`}>
               <form onSubmit={this.submitSignup}>
                 <h1>{ message }</h1>
 
