@@ -28,7 +28,6 @@ const signupUser = (data) => {
         data: data
       })
         .then(response => {
-          console.log(response.data.request);
           dispatch(signupSuccess(response.data.request));
         })
         .catch(error => {

@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import LoginUser from "../../store/actions/loginActions";
 import SignupUser from "../../store/actions/signupActions";
 import "../../css/style.css";
 
-class Authentication extends Component {
+export class Authentication extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -94,7 +95,7 @@ class Authentication extends Component {
           </ul>
           <div className="tab-content">
             <div className={`${signup_class}`}>
-              <form onSubmit={this.submitSignup}>
+              <form onSubmit={this.submitSignup} name="signupForm">
                 <h1 className="row">{message}</h1>
                 {signup_message ? (
                   <h1 className="row">{signup_message}</h1>
@@ -120,14 +121,14 @@ class Authentication extends Component {
                   />
                 </div>
 
-                <button className="button button-block" type="submit">
+                <button className="button button-block" name="submitSignupButton" type="submit">
                   SUBMIT{" "}
                 </button>
               </form>
             </div>
 
             <div className={login_class}>
-              <form onSubmit={this.submitLogin}>
+              <form onSubmit={this.submitLogin} name="loginForm">
                 <h1>{message}</h1>
                 {login_message ? (
                   <h1 className="row">{login_message}</h1>
@@ -167,6 +168,16 @@ class Authentication extends Component {
     );
   }
 }
+
+Authentication.propTypes = {
+  Login: PropTypes.func,
+  Signup: PropTypes.func
+};
+
+Authentication.defaultProps = {
+  Login: () => {},
+  Signup: () => {}
+};
 
 const mapStateToProps = state => {
   return {

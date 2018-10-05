@@ -1,11 +1,11 @@
 import axios from "axios";
 import { LOGIN_FAIL, LOGIN_SUCCESS } from "./actionTypes";
 
-const loginFail = (payload) => {
+const loginFail = payload => {
   return {
     // create an action type for login fail
     type: LOGIN_FAIL,
-    payload:payload
+    payload: payload
   };
 };
 
@@ -28,7 +28,6 @@ const loginUser = (data, push) => {
       data: data
     })
       .then(response => {
-        console.log(response.data.token);
         if (response.data.token) {
           localStorage.setItem("token", response.data.token);
           if (response.data.type === "admin") {
@@ -40,9 +39,7 @@ const loginUser = (data, push) => {
             dispatch(loginSuccess());
             push(`/ViewRequests`);
           }
-        } else {
-          push(`/`);
-        }
+        }  
       })
       .catch(error => {
         if (error.response) {

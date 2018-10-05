@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
+import PropTypes from "prop-types";
 import Request from "../../components/Request";
 import getRequests from "../../store/actions/viewRequestsActions";
 import "../../css/style.css";
 
-class ViewRequests extends Component {
+export class ViewRequests extends Component {
   state = {
     editform: "no_display"
   };
@@ -69,11 +70,11 @@ class ViewRequests extends Component {
         <div id="content">
           <div id="left">
             <div className={editform}>
-              <div className="form">
+              <div className="form" name="editform">
                 <div>
                   <div className="tab-content">
                     <div id="signup">
-                      <form onSubmit={this.editRequest}>
+                      <form onSubmit={this.editRequest} name="editRequestform">
                         <div className="field-wrap">
                           <input
                             type="text"
@@ -122,6 +123,15 @@ class ViewRequests extends Component {
     );
   }
 }
+
+ViewRequests.propTypes = {
+  Requests: PropTypes.func
+};
+
+ViewRequests.defaultProps = {
+  Requests: () => {}
+};
+
 
 const mapStateToProps = state => {
   return {
