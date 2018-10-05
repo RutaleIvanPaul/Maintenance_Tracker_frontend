@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import "../../css/style.css";
 
-class CreateRequest extends Component {
+export class CreateRequest extends Component {
   state = {
     message:"Input Request Here"
   };
@@ -26,7 +26,6 @@ class CreateRequest extends Component {
 		data: data
 	  })
 	  .then((response) => {
-      console.log(response);
       push(`/ViewRequests`);
       }).catch((error) => {
         if (error.response){

@@ -22,7 +22,7 @@ class AdminViewRequests extends Component {
         "x-access-token": localStorage.getItem("token")
       }
     }).then(() => {
-        this.fetchRequests();
+      this.fetchRequests();
     });
   };
 
@@ -34,6 +34,7 @@ class AdminViewRequests extends Component {
         "x-access-token": localStorage.getItem("token")
       }
     }).then(response => {
+      console.log(response.data);
       this.setState({ requests: response.data.request });
       console.log(response.data.request);
     });

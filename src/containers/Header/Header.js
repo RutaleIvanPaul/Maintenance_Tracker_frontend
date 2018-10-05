@@ -1,10 +1,11 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { LOGIN_FAIL } from "../../store/actions/actionTypes";
 import "../../css/style.css";
 
-class Header extends Component {
+export class Header extends Component {
   state = {};
   Logout = () => {
     const { LoginOut } = this.props;
@@ -29,7 +30,7 @@ class Header extends Component {
 
           <span className="logoutSpan">
             <button id="logoutButton">
-              <NavLink className="dropdown-item" to="/" onClick={this.Logout}>
+              <NavLink name="logout" className="dropdown-item" to="/" onClick={this.Logout}>
                 Log Out
               </NavLink>
             </button>
@@ -39,6 +40,15 @@ class Header extends Component {
     );
   }
 }
+
+Header.propTypes = {
+  LoginOut: PropTypes.func,
+};
+
+Header.defaultProps = {
+  LoginOut: () => {}
+};
+
 
 const mapDispatchToProps = dispatch => {
   return {
