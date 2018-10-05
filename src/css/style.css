@@ -410,6 +410,14 @@ textarea {
   padding-bottom: 2px;
 }
 
+.request_title{
+  padding-left:10px;
+}
+
+.request_descritpion{
+  padding-left:10px;
+}
+
 .pagenav {
   color: #888;
   text-align: center;
