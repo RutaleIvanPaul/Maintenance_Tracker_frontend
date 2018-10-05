@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import axios from "axios";
+import { connect } from "react-redux";
+import LoginUser from "../../store/actions/loginActions";
+import SignupUser from "../../store/actions/signupActions";
 import "../../css/style.css";
 
 class Authentication extends Component {
@@ -10,7 +12,7 @@ class Authentication extends Component {
       signup_tab: "tab active",
       login_class: "remove",
       login_tab: "tab",
-      message:"Sign Up Here"
+      message: "Sign Up Here"
     };
   }
 
@@ -21,7 +23,7 @@ class Authentication extends Component {
         login_class: "remove",
         login_tab: "tab",
         signup_tab: "tab active",
-        message:"Sign Up Here"
+        message: "Sign Up Here"
       });
     }
     if (event.target.name === "login") {
@@ -30,7 +32,7 @@ class Authentication extends Component {
         login_class: "show",
         signup_tab: "tab",
         login_tab: "tab active",
-        message:"Log in Here"
+        message: "Log in"
       });
     }
   };
@@ -47,82 +49,56 @@ class Authentication extends Component {
       password,
       usertype
     };
-    axios({
-      url: "https://kla08-maintenance-tracker.herokuapp.com/api/v1/auth/signup",
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      data: data
-    }).then(response => {
-      console.log(response.data.request);
-      this.setState({
-        message:response.data.request 
-      })
-    }).catch((error) => {
-      if (error.response){
-        this.setState({
-          message:error.response.data.error
-        })
-      }
-    });
+    const { Signup } = this.props;
 
+    Signup(data);
   };
 
   submitLogin = e => {
     e.preventDefault();
     const { email, password } = this.state;
-    const { history } = this.props;
-    const { push } = history;
+    const { Login } = this.props;
     const data = {
       email,
       password
     };
-    axios({
-      url: "https://kla08-maintenance-tracker.herokuapp.com/api/v1/auth/login",
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      data: data
-    }).then(response => {
-      console.log(response.data.token);
-      if (response.data.token) {
-        localStorage.setItem("token", response.data.token);
-        if (response.data.type === "admin") {
-          localStorage.setItem("type", "admin");
-          push(`/AdminViewRequests`);
-        } else {
-          localStorage.setItem("type", "user");
-          push(`/ViewRequests`);
-        }
-      } else {
-        push(`/`);
-      }
-    });
+
+    const { history } = this.props;
+    const { push } = history;
+    Login(data, push);
   };
 
   render() {
-    const { signup_class, login_class, login_tab, signup_tab, message } = this.state;
+    const {
+      signup_class,
+      login_class,
+      login_tab,
+      signup_tab,
+      message
+    } = this.state;
+    const { signup_message, login_message } = this.props;
     return (
       <div>
         <div className="form">
-          <ul className="tab-group">
-            <li className={signup_tab} id="signup-tab">
+          <ul className="tab-group row">
+            <li className={`${signup_tab} col-md-6`} id="signup-tab">
               <a href="#signup" name="signup" onClick={this.switchDisplay}>
                 Sign Up
               </a>
             </li>
-            <li className={login_tab} id="login-tab">
+            <li className={`${login_tab} col-md-6`} id="login-tab">
               <a href="#login" name="login" onClick={this.switchDisplay}>
                 Log In
               </a>
             </li>
           </ul>
           <div className="tab-content">
-            <div className={signup_class}>
+            <div className={`${signup_class}`}>
               <form onSubmit={this.submitSignup}>
-                <h1>{ message }</h1>
+                <h1 className="row">{message}</h1>
+                {signup_message ? (
+                  <h1 className="row">{signup_message}</h1>
+                ) : null}
 
                 <div className="field-wrap">
                   <input
@@ -152,8 +128,10 @@ class Authentication extends Component {
 
             <div className={login_class}>
               <form onSubmit={this.submitLogin}>
-                <h1>{ message }</h1>
-
+                <h1>{message}</h1>
+                {login_message ? (
+                  <h1 className="row">{login_message}</h1>
+                ) : null}
                 <div className="field-wrap">
                   <input
                     type="email"
@@ -190,4 +168,22 @@ class Authentication extends Component {
   }
 }
 
-export default Authentication;
+const mapStateToProps = state => {
+  return {
+    authState: state.isAuth.isAuthentic,
+    signup_message: state.signup.signup_message,
+    login_message: state.isAuth.login_message
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    Login: (data, push) => dispatch(LoginUser(data, push)),
+    Signup: data => dispatch(SignupUser(data))
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Authentication);

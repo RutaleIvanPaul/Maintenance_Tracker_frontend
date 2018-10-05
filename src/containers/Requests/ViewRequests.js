@@ -1,11 +1,12 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import axios from "axios";
 import Request from "../../components/Request";
+import getRequests from "../../store/actions/viewRequestsActions";
 import "../../css/style.css";
 
 class ViewRequests extends Component {
   state = {
-    requests: [],
     editform: "no_display"
   };
 
@@ -14,16 +15,8 @@ class ViewRequests extends Component {
   }
 
   fetchUserRequests = () =>{
-    axios({
-      url:
-        "https://kla08-maintenance-tracker.herokuapp.com/api/v1/users/requests",
-      method: "GET",
-      headers: {
-        "x-access-token": localStorage.getItem("token")
-      }
-    }).then(response => {
-      this.setState({ requests: response.data.requests });
-    });
+    const {Requests} = this.props;
+    Requests();
   }
 
   eventListener = event =>
@@ -69,7 +62,8 @@ class ViewRequests extends Component {
   };
 
   render() {
-    const { requests, editform, title, description } = this.state;
+    const { editform, title, description } = this.state;
+    const { requests } = this.props;
     return (
       <div className="main">
         <div id="content">
@@ -129,4 +123,20 @@ class ViewRequests extends Component {
   }
 }
 
-export default ViewRequests;
+const mapStateToProps = state => {
+  return {
+    requests: state.view_requests.requests
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    Requests: () => dispatch(getRequests())
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ViewRequests);
+
